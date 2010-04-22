@@ -1,0 +1,92 @@
+<html>
+    <script src="/static/jquery-1.3.2.min.js" language="Javascript"></script>
+
+    <script type="text/javascript">
+        var selected = [];
+
+        function seqWord(w1, w2){
+            // -1, means w1 goes first
+            // 1, means w2 goes first
+            // 0, non seq
+            id1s = w1.split('_')
+            id2s = w2.split('_')
+            if( id1s.length != id2s.length ) return 0;
+            if( id1s[1] != id2s[1] ) return 0;
+            if( id1s[2] - id2s[2] == 1 ) return 1;
+            else if( id2s[2] - id1s[2] == 1 ) return -1;
+            else return 0;
+        }
+
+        $(document).ready(
+
+            function(){
+                var ps = 0;
+                $('.annotatable').each(
+                    function(){
+                        words = $(this).text().split(/\s+/);
+                        $(this).html('')
+                        var i;
+                        var newhtml = '';
+                        for(i=0;i<words.length;i++){
+                            wordElement = document.createElement('span')
+                            this.appendChild(wordElement);
+                            $(wordElement).addClass('word').attr('id','w_' + ps + '_' + i).text(words[i])
+                            this.appendChild(document.createTextNode(" "))
+                        }
+                        ps += 1;
+                    }
+                );
+
+                $('.word').hover(
+                    function(){ if( !$(this).hasClass('tog') ) $(this).addClass('hov') },
+                    function(){ $(this).removeClass('hov') }
+                    ).click(
+                        function(){
+                            //if( this in selected ){
+                                //$(
+                            //}
+                            if( selected.length == 0 ){
+                                $(this).toggleClass('tog')
+                                selected.unshift(this)
+                            }
+                           /*
+                            else{
+                                if( seqWord( this, selected[0] ) 
+
+                                if( seqWord(this, selected[0]) ) || seqWord(this, selected[selected.length-1])){
+                                //}
+                                //if( selected[0]
+                            }*/
+                        }
+                    )
+            }
+        )
+    </script>
+
+    <style>
+        body{
+            font-family: Arial;
+        }
+
+        .word{ }
+
+        .hov{
+            color:red;
+        }
+
+        .tog{
+            color:green;
+        }
+    </style>
+
+    <body>
+        <div>
+            <p class="annotatable">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pharetra placerat mi, suscipit varius ipsum euismod eget. Duis semper venenatis ante, in consequat tellus euismod ut. Integer tristique pellentesque iaculis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur id felis tortor. Nulla imperdiet ligula et urna fermentum et luctus arcu pretium. Sed convallis bibendum viverra. Quisque ut porttitor sem. Sed lectus felis, cursus eu blandit ac, sodales bibendum neque. Praesent iaculis libero et magna porta sagittis. Pellentesque a tincidunt ante. Quisque vulputate vestibulum facilisis. Nam et arcu quis arcu placerat sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla vulputate diam nec purus fermentum semper.
+            </p>
+            <p class="annotatable">
+    Duis non lacus justo. Donec nec diam dui, sit amet placerat metus. Curabitur dictum lorem in diam dictum quis eleifend odio pharetra. Praesent viverra, mauris at luctus vulputate, nisl odio eleifend metus, eget gravida metus ante non ipsum. Sed sagittis mauris sit amet neque posuere scelerisque. Ut fringilla vulputate mattis. Cras scelerisque adipiscing rhoncus. Nam tempus faucibus diam, eget fringilla libero hendrerit et. Integer blandit risus nec nisi aliquam ut congue sem molestie. Vivamus ornare sapien in urna pellentesque tristique. In pharetra interdum lobortis. Vivamus eget pharetra nulla. Curabitur sodales velit quis eros mattis auctor. Sed sit amet eros lorem, ut sagittis lectus. In a odio lectus. Aliquam erat volutpat. Ut quam nibh, faucibus vitae varius eu, ornare eu felis.
+            </p>
+        </div>
+    </body>
+</html>
