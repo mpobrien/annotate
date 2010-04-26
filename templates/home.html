@@ -1,7 +1,11 @@
 <html>
 	<body>
 		<table>
-			<form action="/" method="POST">
+			<form action="/new/" method="POST">
+				<#list form.fields as field>
+					${field.errors}
+				</#list>
+
 			    ${form.table}
                 <input type="submit"/>
             </form>

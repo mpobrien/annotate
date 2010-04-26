@@ -15,23 +15,20 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
 
-@At("^/?$")
-public class HomeController extends Controller{
+@At("^/snippets/([a-zA-Z0-9\\-]*)/?$")
+public class ShowSnippetController extends Controller{
+	Logger log = Logger.getLogger( ShowSnippetController.class );
 
 	@Inject
 	TextSnippetDAO snippets;
 
-    @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){
-		List<TextSnippet> allSnippets = snippets.findAll(0,100);
-		Map context = Maps.newHashMap();
-		context.put( "snippets", allSnippets );
-		return responses.render("listing.html", context);
-    }
+	public String slug;
 
     @Override
-    public WebResponse post(HttpServletRequest req, HttpServletResponse res){
-		return get(req, res);
+    public WebResponse get(HttpServletRequest req, HttpServletResponse res){
+		this.slug = args.get(0);
+		TextSnippet ts = snippets.findBySlug(this.slug);
+		return responses.render("snippet.html", ImmutableMap.of("snippet", ts));
     }
 
 }

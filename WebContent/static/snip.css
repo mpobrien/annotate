@@ -1,0 +1,7 @@
+
+.content{ width: 40%; font-family: Georgia; }
+	.annotatable{  font-size: 14px; line-height: 30px; }
+		.word{ }
+			.hov{ background-color: #FFEA94; cursor: pointer; }
+			.tog{ background-color: #FFEA94; font-weight: bold; }
+
