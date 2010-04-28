@@ -1,4 +1,3 @@
-
 var selected = [];
 
 function seqWord(w1, w2){<!--{{{-->
@@ -13,6 +12,34 @@ function seqWord(w1, w2){<!--{{{-->
 	else if( id2s[2] - id1s[2] == 1 ) return -1;
 	else return 0;
 }<!--}}}-->
+
+function highlightNotes(){//{{{
+    if( notes ){
+        for( i in notes ){
+            startidx = notes[i][0]
+            endidx = notes[i][1]
+            var j;
+            for(j = startidx; j<= endidx; j++){
+                $('#w_' + 0 + '_' + j).addClass('noted')
+            }
+
+        }
+    }
+}//}}}
+
+function addNewNote(){
+    console.debug('here')
+    console.debug(slug)
+    startIndex = $(selected[0]).attr('id').split('_')[2]
+    endIndex = $(selected[selected.length-1]).attr('id').split('_')[2]
+    
+    $.post('/snippets/' + slug + '/newnote/', 
+           {'startIndex' : startIndex, 'endIndex' : endIndex },
+            function(data){
+                alert(data); // John
+            }, "json");
+    return false;
+}
 
 $(document).ready(
 	function(){
@@ -38,13 +65,12 @@ $(document).ready(
 			function(){ $(this).removeClass('hov') }
 			).click(
 				function(){
-					console.debug('hey')
 					if( selected.length == 0 ){
 						$(this).toggleClass('tog')
 						selected.unshift(this)
 					} else {
 						first = selected[0];
-						last = selected[selected.length -1];
+						last = selected[selected.length - 1];
 						if( $(this).hasClass('tog') ){
 							if( this == first ){
 								$(this).removeClass('tog')
@@ -73,7 +99,19 @@ $(document).ready(
 							selected = [this]
 						}
 					}
+
+                    if( selected.length > 0 ){
+                        leftpos = $(selected[0]).offset().left
+                        toppos = $(selected[0]).offset().top 
+                        addnote_height = $('#addnote').height()
+                        addnote_width = $('#addnote').width()
+                        $('#addnote').css({'left':leftpos-4+'px',
+                                           'top':toppos-addnote_height-5 + 'px'}).fadeIn()
+                    }else{
+                        $('#addnote').hide();
+                    }
 				}
 			)
+        highlightNotes();
 	}
 )

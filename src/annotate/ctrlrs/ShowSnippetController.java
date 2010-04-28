@@ -28,6 +28,9 @@ public class ShowSnippetController extends Controller{
     public WebResponse get(HttpServletRequest req, HttpServletResponse res){
 		this.slug = args.get(0);
 		TextSnippet ts = snippets.findBySlug(this.slug);
+		if( ts == null ){
+			return responses.render("404.html");
+		}
 		return responses.render("snippet.html", ImmutableMap.of("snippet", ts));
     }
 

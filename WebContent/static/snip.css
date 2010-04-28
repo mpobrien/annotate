@@ -4,4 +4,8 @@
 		.word{ }
 			.hov{ background-color: #FFEA94; cursor: pointer; }
 			.tog{ background-color: #FFEA94; font-weight: bold; }
+            .noted{ border-bottom: 2px solid green; }
 
+
+/*#addnote{  background-color: #FF8585; z-index: 1000; position: absolute;}*/
+#addnote{ display: none; background-color: #FF8585; z-index: 1000; position: absolute; font-family: Georgia; font-size:11px; }
