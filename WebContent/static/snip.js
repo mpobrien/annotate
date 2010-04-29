@@ -28,15 +28,22 @@ function highlightNotes(){//{{{
 }//}}}
 
 function addNewNote(){
-    console.debug('here')
-    console.debug(slug)
     startIndex = $(selected[0]).attr('id').split('_')[2]
     endIndex = $(selected[selected.length-1]).attr('id').split('_')[2]
-    
     $.post('/snippets/' + slug + '/newnote/', 
            {'startIndex' : startIndex, 'endIndex' : endIndex },
             function(data){
                 alert(data); // John
+            }, "json");
+    return false;
+}
+
+function lookup(){
+    word = $(selected[0]).text();
+    $.get('/verbs/', 
+           {'term' : word },
+            function(data){
+                console.debug(data); // John
             }, "json");
     return false;
 }
@@ -75,10 +82,12 @@ $(document).ready(
 							if( this == first ){
 								$(this).removeClass('tog')
 								selected.shift()
+                                $('#addnote').fadeOut();
 								return;
 							}else if( this == last ){
 								$(this).removeClass('tog')
 								selected.pop()
+                                $('#addnote').fadeOut();
 								return;
 							}else{
 								$('.tog').removeClass('tog')
@@ -107,8 +116,6 @@ $(document).ready(
                         addnote_width = $('#addnote').width()
                         $('#addnote').css({'left':leftpos-4+'px',
                                            'top':toppos-addnote_height-5 + 'px'}).fadeIn()
-                    }else{
-                        $('#addnote').hide();
                     }
 				}
 			)

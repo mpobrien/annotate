@@ -13,4 +13,5 @@ public class TextNote extends AbstractMongoEntity{
 	
 	public int getEndIndex(){    return endIndex;  }
 	public void setEndIndex(int endIndex){    this.endIndex = endIndex;  }
+
 }
