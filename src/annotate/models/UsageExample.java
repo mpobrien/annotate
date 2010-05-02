@@ -6,13 +6,13 @@ import java.util.*;
 @MongoDocument
 public class UsageExample extends AbstractMongoEntity{
 
-    private String usageText;
-    private String translation;
+	private String definition;
+	@MongoEmbedded	
+	private List<String> examples;
 
-    public String getUsageText(){    return usageText;  }
-    public void setUsageText(String usageText){    this.usageText = usageText;  }
-    
-    public String getTranslation(){    return translation;  }
-    public void setTranslation(String translation){    this.translation = translation;  }
-
+	public List<String> getExamples(){    return examples;  }
+	public void setExamples(List<String> examples){    this.examples = examples;  }
+	
+	public String getDefinition(){    return definition;  }
+	public void setDefinition(String definition){    this.definition = definition;  }
 }

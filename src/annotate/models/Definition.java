@@ -18,6 +18,7 @@ public class Definition extends AbstractMongoEntity{
 
     private String root;
     private String definition;
+
 	@MongoEmbedded
     private List<UsageExample> examples;
 
