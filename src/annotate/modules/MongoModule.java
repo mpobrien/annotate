@@ -19,7 +19,8 @@ public class MongoModule extends AbstractModule{
 		Morphia morphia = new Morphia();
 		morphia.map(TextSnippet.class)
 		       .map(TextNote.class)
-		       .map(Verb.class);
+		       .map(Verb.class)
+			   .map(Definition.class);
 		bind(Morphia.class).toInstance(morphia);
     }
 }

@@ -15,24 +15,21 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
 
-@At("^/verbs/?$")
-public class VerbLookup extends Controller{
-	Logger log = Logger.getLogger( VerbLookup.class );
+@At("^/words/?$")
+public class ShowDefinition extends Controller{
+	Logger log = Logger.getLogger( ShowDefinition.class );
 
 	@Inject
-	VerbDAO verbs;
-
-	public String slug;
+	DefinitionDAO defs;
 
     @Override
     public WebResponse get(HttpServletRequest req, HttpServletResponse res){
-        String term = req.getParameter("term");
-        List<Verb> results = new ArrayList<Verb>(0);
+		String term = req.getParameter("term") + "";
+        List<Definition> results = new ArrayList<Definition>(0);
         if( term != null && term.length() > 0 ){
-            results = verbs.findByTerm(term);
+            results = defs.findByTerm(term);
         }
-		return responses.json(results);
+		return responses.render("definition.html", ImmutableMap.of("definitions", results));
     }
-
 
 }
