@@ -7,7 +7,6 @@ import java.util.*;
 public class UsageExample extends AbstractMongoEntity{
 
 	private String definition;
-	@MongoEmbedded	
 	private List<String> examples;
 
 	public List<String> getExamples(){    return examples;  }

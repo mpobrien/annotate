@@ -19,6 +19,8 @@ import com.mongodb.DBCursor;
 public class ShowSnippetController extends Controller{
 	Logger log = Logger.getLogger( ShowSnippetController.class );
 
+	public static final String SUCCESS_NEW = "new_snippet_created";
+
 	@Inject
 	TextSnippetDAO snippets;
 
@@ -26,12 +28,23 @@ public class ShowSnippetController extends Controller{
 
     @Override
     public WebResponse get(HttpServletRequest req, HttpServletResponse res){
+        SessionMessage sm = SessionMessage.getInstance(req, res);
+        Map context = Maps.newHashMap();
+
+
+		if( SUCCESS_NEW.equals(sm.get("success") + "") ){
+			context.put("success", "new");
+		}else{
+			context.put("success", "");
+		}
+
 		this.slug = args.get(0);
 		TextSnippet ts = snippets.findBySlug(this.slug);
 		if( ts == null ){
 			return responses.render("404.html");
 		}
-		return responses.render("snippet.html", ImmutableMap.of("snippet", ts));
+		context.put("snippet", ts);
+		return responses.render("snippet.html", context);
     }
 
 }

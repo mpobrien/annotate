@@ -2,11 +2,53 @@
     <body>
         <div>
             <form action="/words/new/" method="post">
-				<table cellspacing="0">
-					${form.table}
-				</table>
+				<h1>Add new Definition</h1>
+				<ul>
+					<li>${form.rootWord.widget.label} ${form.rootWord.widget.html}</li>
+					<li>${form.partOfSpeech.widget.label} ${form.partOfSpeech.widget.html}</li>
+					<li>${form.gender.widget.label} ${form.gender.widget.html}</li>
+					<h3>Alternate Forms:</h3>
+					<ul>
+						<li><input type="text" name="alternate" value=""/><a href="#" onclick="removeAlternate(this)">Remove</a></li>
+						<li id="newAlternate"><a href="#" onclick="addAlternateForm()">Add new alternate</a>
+					</ul>
+					<hr>
+					<h3>Usage:</h3>
+					<ul>
+						<#list form.definitions as field>
+							<li>
+								Definition: ${field.widget.html} </br>
+								Example Usage (optional): ${form.fields[field.name+"_usage"].widget.html}
+							</li>
+						</#list>
+						<li id="newDef"><a href="#" onclick="addDefinition()">Add new definition</a>
+					</ul>
+				</ul>
+
+				${form.defId.widget.html}
+
 				<input type="submit"/>
             </form>
         </div>
     </body>
+    <script src="/static/jquery-1.3.2.min.js" language="Javascript"></script>
+	<script>
+		numDefinitions = ${form.definitions?size}
+
+		function addDefinition(){<!--{{{-->
+			numDefinitions++;
+			$('#newDef').before(
+				'<li>Definition: <input type="text" name="definition_' + numDefinitions + '"/><br/>\
+				     Example Usage (optional): <input type="text" name="definition_' + numDefinitions + '_usage"/></li>')
+		}<!--}}}-->
+
+		function addAlternateForm(){<!--{{{-->
+			$('#newAlternate').before('<li><input type="text" name="alternate" value=""/><a href="#" onclick="removeAlternate(this)">Remove</a></li>')
+		}<!--}}}-->
+
+		function removeAlternate(link){<!--{{{-->
+			$(link).parent().remove()
+		}<!--}}}-->
+
+	</script>
 </html>

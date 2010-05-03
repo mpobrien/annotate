@@ -18,10 +18,13 @@ import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
+import java.util.regex.*;
 
 @At("^/new/$")
 public class AddSnippetController extends Controller{
-	Logger log = Logger.getLogger( AddSnippetController.class );
+	private static final Logger log = Logger.getLogger( AddSnippetController.class );
+	private static final Pattern NONLATIN = Pattern.compile("[^\\w-]");
+	private static final Pattern WHITESPACE = Pattern.compile("[\\s]");
 
 	@Inject
 	TextSnippetDAO snippets;
@@ -43,31 +46,38 @@ public class AddSnippetController extends Controller{
 			TextSnippet ts = new TextSnippet();
 			ts.setText(f.getTextField().getValue()); 
 			ts.setTitle(f.getTitleField().getValue());
-			try{
-				ts.setSlug( slugify( ts.getTitle() ) );
-			}catch(UnsupportedEncodingException e){
-				ts.setSlug( ts.getTitle() );
-				log.error("Unsupported encoding.", e);
-			}
+			ts.setSlug( slugify( ts.getTitle() ) );
 			snippets.save(ts);
-			return responses.reverseRedirect(HomeController.class);
+
+			//TODO handle duplicate slug if necessary?
+
+			SessionMessage sm = SessionMessage.getInstance(req, res);
+			sm.put( "success", ShowSnippetController.SUCCESS_NEW );
+			return responses.reverseRedirect( ShowSnippetController.class, ts.getSlug() );
 		}else{
 			return responses.render("home.html", ImmutableMap.of("form", f) );
 		}
     }
 
-    public static String slugify(String input) throws UnsupportedEncodingException {//{{{
-        if (input == null || input.length() == 0) return "";
-        String toReturn = normalize(input);
-        toReturn = toReturn.replace(" ", "-");
-        toReturn = toReturn.toLowerCase();
-        toReturn = URLEncoder.encode(toReturn, "UTF-8");
-        return toReturn;
-    }//}}}
- 
-    private static String normalize(String input) {//{{{
-        if (input == null || input.length() == 0) return "";
-        return Normalizer.normalize(input, Form.NFD).replaceAll("[^\\p{ASCII}]","");
-    }//}}}
+	public static String slugify(String input) {
+		String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
+		String normalized = Normalizer.normalize(nowhitespace, Form.NFD);
+		String slug = NONLATIN.matcher(normalized).replaceAll("");
+		return slug.toLowerCase(Locale.ENGLISH);
+	}
 
+//     public static String slugify(String input) throws UnsupportedEncodingException {//{{{
+//         if (input == null || input.length() == 0) return "";
+//         String toReturn = normalize(input);
+//         toReturn = toReturn.replace(" ", "-");
+//         toReturn = toReturn.toLowerCase();
+//         toReturn = URLEncoder.encode(toReturn, "UTF-8");
+//         return toReturn;
+//     }//}}}
+//  
+//     private static String normalize(String input) {//{{{
+//         if (input == null || input.length() == 0) return "";
+//         return Normalizer.normalize(input, Form.NFD).replaceAll("[^\\p{ASCII}]","");
+//     }//}}}
+// 
 }

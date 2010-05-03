@@ -1,23 +1,36 @@
 package annotate.models;
+import org.apache.log4j.*;
 import com.google.code.morphia.*;
 import com.google.code.morphia.annotations.*;
+import com.google.common.collect.*;
 import java.util.*;
+import com.mob.forms.*;
+import annotate.forms.DefinitionForm;
 
 @MongoDocument
 public class Definition extends AbstractMongoEntity{
+	private static final Logger log = Logger.getLogger( Definition.class );
 
-	public enum PartOfSpeech{
-		ADJECTIVE,
-		VERB,
-		NOUN,
-		ADVERB,
-		PRONOUN,
-		INTERJECTION,
-		CONJUNCTION
+	public enum PartOfSpeech{//{{{
+		Adjective,
+		Verb,
+		Noun,
+		Adverb,
+		Pronoun,
+		Interjection,
+		Conjunction
 	};
+//}}}
+
+    public enum Gender{//{{{
+		None,
+		Masculine,
+		Feminine
+	}//}}}
 
     private String root;
     private String definition;
+	private Gender gender;
 
 	@MongoEmbedded
     private List<UsageExample> examples;
@@ -25,7 +38,6 @@ public class Definition extends AbstractMongoEntity{
 	private String usageNote;
 	private PartOfSpeech partOfSpeech;
 
-	@MongoEmbedded
 	private List<String> alternates;
     
     public String getRoot(){    return root;  }
@@ -45,4 +57,30 @@ public class Definition extends AbstractMongoEntity{
 
     public List<UsageExample> getExamples(){    return examples;  }
     public void setExamples(List<UsageExample> examples){    this.examples = examples;  }
+
+	public Gender getGender(){    return gender;  }
+	public void setGender(Gender gender){    this.gender = gender;  }
+
+	public static Definition fromDefinitionForm(DefinitionForm form){//{{{
+		Definition d = new Definition();
+		d.setPartOfSpeech( form.getPartOfSpeech().getValue() );
+		d.setRoot( form.getRootWord().getValue() );
+
+		//TODO use a better REGEX here
+		d.setAlternates( ImmutableList.copyOf( form.getStringsMatching("alternate", "\\w+") ) );
+		List<UsageExample> defs = Lists.newArrayList();
+		for( StringField definition : form.getDefinitions() ){
+			UsageExample ue = new UsageExample();
+			ue.setDefinition( definition.getValue() );
+			if( form.getFields().containsKey( definition.getName() + "_usage" ) ){
+				ue.setExamples( ImmutableList.of( ((StringField)form.getFields().get(definition.getName() + "_usage")).getValue() ) ); 
+			}else{
+				ue.setExamples( new ArrayList<String>() );
+			}
+			defs.add( ue );
+		}
+		d.setExamples( defs );
+		return d;
+	}//}}}
+	
 }
