@@ -8,4 +8,8 @@
 
 
 /*#addnote{  background-color: #FF8585; z-index: 1000; position: absolute;}*/
-#addnote{ display: none; background-color: #FF8585; z-index: 1000; position: absolute; font-family: Georgia; font-size:11px; }
+#addnote{ display: none; background-color: black; z-index: 1000; position: absolute; font-family: Georgia; font-size:11px; color: white; padding: 5px; }
+    #lookup{}
+    #newnote{}
+
+#addnote a:link{ text-decoration: none; color: white;}
