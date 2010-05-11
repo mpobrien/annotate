@@ -18,8 +18,13 @@ import com.mongodb.DBCursor;
 @At("^/?$")
 public class HomeController extends Controller{
 
+	private static final Logger log = Logger.getLogger( HomeController.class );
+
 	@Inject
 	TextSnippetDAO snippets;
+
+	@Inject
+	UserContext userContext;
 
     @Override
     public WebResponse get(HttpServletRequest req, HttpServletResponse res){
