@@ -1,10 +1,23 @@
 <html>
+    <link href="static/main.css" rel="stylesheet" />
     <body>
-        <ul>
-			<#list snippets as snippet>
-				<li><a href="/snippets/${snippet.slug}/">${snippet.title}</a></li>
-			</#list>
-        </ul>
-		<a href="/new/">Submit a new Snippet</a>
+        <div id="header">
+            <#if user.isLoggedIn>
+                ${user.username} &nbsp; <a href="/logout/">(Log Out)</a>
+            <#else>
+                <a href="/login/">Log in</a>
+            </#if>
+        </div>
+		<div id="content">
+			<ul>
+				<#list snippets as snippet>
+					<li><a href="/snippets/${snippet.slug}/">${snippet.title}</a></li>
+				</#list>
+			</ul>
+			<a href="/new/">Submit a new Snippet</a>
+		</div>
+        <div id="footer"> 
+            &copy; 2010 mikey o'brien
+        </div>
     </body>
 </html>

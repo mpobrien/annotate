@@ -25,26 +25,22 @@ public class UserProvider extends ContextProcessor implements Provider<User>{
 	private User user = new AnonymousUser();
     
 	@Inject
-    public UserProvider(HttpServletRequest request, UserDAO users){
+    public UserProvider(HttpServletRequest request, UserDAO users){//{{{
         this.request = request;
 		log.error("cookies: " + request.getCookies() );
 		this.users = users;
-    }
+    }//}}}
 
-	public void process(HttpServletRequest request){
+	public void process(HttpServletRequest request){//{{{
 		Cookie[] cookies = request.getCookies();
 		if( cookies == null || cookies.length == 0 ){
-			log.error("no cookies");
 			return;
 		}else{
 			for( Cookie c : cookies ){
-				log.error( c.getName() + " : " + c.getValue() );
-				if( (c.getName() + "").equals("auth") ){
+				if( (c.getName() + "").equals(LoginController.LOGIN_COOKIE_NAME) ){
 					String auth = c.getValue() + "";
 					if( auth.length() > 0 ){
-						log.error("looking up");
 						User u = users.getByAuth(auth);
-						log.error(u);
 						if( u == null ){
 							u = new AnonymousUser();
 						}
@@ -55,10 +51,10 @@ public class UserProvider extends ContextProcessor implements Provider<User>{
 			}
 			return;
 		}
-	}
+	}//}}}
 
-	public User get(){
+	public User get(){//{{{
 		return this.user;
-	}
+	}//}}}
 
 }

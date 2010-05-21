@@ -27,19 +27,18 @@ public class HomeController extends Controller{
 	UserProvider up;
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){
-		User u = up.get();
-		log.error(u);
-		log.error(u.getUsername());
+    public WebResponse get(HttpServletRequest req, HttpServletResponse res){//{{{
+		User user = up.get();
 		List<TextSnippet> allSnippets = snippets.findAll(0,100);
 		Map context = Maps.newHashMap();
 		context.put( "snippets", allSnippets );
+		context.put( "user", user );
 		return responses.render("listing.html", context);
-    }
+    }//}}}
 
     @Override
-    public WebResponse post(HttpServletRequest req, HttpServletResponse res){
+    public WebResponse post(HttpServletRequest req, HttpServletResponse res){//{{{
 		return get(req, res);
-    }
+    }//}}}
 
 }

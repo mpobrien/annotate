@@ -23,6 +23,7 @@ public class LoginController extends Controller{
 
 	private static final Logger log = Logger.getLogger( RegisterController.class );
 	public static final String TEMPLATE = "login.html";
+	public static final String LOGIN_COOKIE_NAME = "auth";
 
 	@Inject
     UserDAO users;
@@ -60,7 +61,7 @@ public class LoginController extends Controller{
     }//}}}
 
 	public void login(User user, HttpServletResponse res){//{{{
-		Cookie c = new Cookie("auth", user.getAuth() );
+		Cookie c = new Cookie(LOGIN_COOKIE_NAME, user.getAuth() );
 		c.setPath("/");
 		c.setMaxAge(60*60*24*14);
 		res.addCookie( c );

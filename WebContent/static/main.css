@@ -1,0 +1,26 @@
+/* solo goldfish:
+ * #F08E05 gold
+ * #fcd614 yellow
+ * #fcec97 pale
+ * #fffcfc offwhite
+ * #229c79 aqua */
+
+body{
+    margin: 0px;
+}
+
+#header{
+    height: 50px;
+    width: 100%;
+    background-color: #F08E05;
+}
+
+#content{}
+
+#footer{
+    font-size: .8em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-style: italic;
+}
