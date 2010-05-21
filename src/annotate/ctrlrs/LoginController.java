@@ -6,6 +6,7 @@ import com.mob.forms.*;
 import com.mob.forms.widgets.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 import org.apache.log4j.*;
 import java.util.*;
 import com.google.inject.*;
@@ -50,11 +51,20 @@ public class LoginController extends Controller{
 					form.error(form.getPassword(), "Invalid password");
 					return responses.render(TEMPLATE, context);
 				}else{
-					return new StringWebResponse("yeah");
+					log.info("successful log in");
+					login(testUser, res);
+					return responses.redirect("/");
 				}
 			}
 		}
     }//}}}
+
+	public void login(User user, HttpServletResponse res){//{{{
+		Cookie c = new Cookie("auth", user.getAuth() );
+		c.setPath("/");
+		c.setMaxAge(60*60*24*14);
+		res.addCookie( c );
+	}//}}}
 
     class LoginForm extends AbstractForm{//{{{
         private final StringField username;

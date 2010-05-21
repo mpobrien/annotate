@@ -1,5 +1,6 @@
 package annotate.models;
 import com.google.code.morphia.*;
+import com.mob.web.*;
 import java.util.*;
 import com.google.code.morphia.annotations.*;
 import java.security.MessageDigest;
@@ -11,11 +12,12 @@ import org.apache.commons.codec.binary.Base64;
 
 
 @MongoDocument
-public class User extends AbstractMongoEntity{
+public class User extends AbstractMongoEntity implements SiteUser{
 	
     private String username;
     private String passwordHash;
     private String salt;
+	private String auth;
 
     public String getUsername(){    return username;  }
     public void setUsername(String username){    this.username = username;  }
@@ -25,6 +27,9 @@ public class User extends AbstractMongoEntity{
     
     public String getSalt(){    return salt;  }
     public void setSalt(String salt){    this.salt = salt;  }
+
+	public String getAuth(){    return auth;  }
+	public void setAuth(String auth){    this.auth = auth;  }
 
 	public byte[] getHash(String password, byte[] salt) throws NoSuchAlgorithmException, UnsupportedEncodingException {//{{{
 		MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -53,4 +58,9 @@ public class User extends AbstractMongoEntity{
 		}
 	}//}}}
 
+	public boolean getIsLoggedIn(){
+		return true;
+	}
+
+	
 }

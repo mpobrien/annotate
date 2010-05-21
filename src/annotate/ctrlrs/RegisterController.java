@@ -1,5 +1,5 @@
 package annotate.ctrlrs;
-import annotate.forms.*;
+import annotate.forms.*;//{{{
 import annotate.models.*;
 import com.mob.web.*;
 import com.mob.forms.*;
@@ -16,6 +16,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
+import java.security.*;//}}}
 
 @At("^/register/?$")
 public class RegisterController extends Controller{
@@ -97,6 +98,7 @@ public class RegisterController extends Controller{
 		User u = new User();
 		u.setUsername(username);
 		u.resetPassword( password );
+		u.setAuth( UUID.randomUUID().toString() );
 		return u;
 	}//}}}
 

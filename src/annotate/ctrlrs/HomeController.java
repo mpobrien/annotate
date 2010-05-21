@@ -1,6 +1,7 @@
 package annotate.ctrlrs;
 import annotate.forms.*;
 import annotate.models.*;
+import annotate.modules.*;
 import com.mob.web.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,12 +23,14 @@ public class HomeController extends Controller{
 
 	@Inject
 	TextSnippetDAO snippets;
-
 	@Inject
-	UserContext userContext;
+	UserProvider up;
 
     @Override
     public WebResponse get(HttpServletRequest req, HttpServletResponse res){
+		User u = up.get();
+		log.error(u);
+		log.error(u.getUsername());
 		List<TextSnippet> allSnippets = snippets.findAll(0,100);
 		Map context = Maps.newHashMap();
 		context.put( "snippets", allSnippets );

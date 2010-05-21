@@ -27,6 +27,17 @@ public class UserDAO extends AbstractMongoDAO<User>{
 		return result;
 	}
 
+	public User getByAuth(String auth){
+		User result = null;
+		BasicDBObject query = new BasicDBObject();
+        query.put("auth", auth);
+		BasicDBObject obj = (BasicDBObject)collection().findOne(query);
+		if( obj != null ) {
+			result = map(obj);
+		}
+		return result;
+	}
+
 	
     @Override
     protected DBCollection collection() {
