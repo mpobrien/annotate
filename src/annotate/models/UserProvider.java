@@ -27,7 +27,6 @@ public class UserProvider extends ContextProcessor implements Provider<User>{
 	@Inject
     public UserProvider(HttpServletRequest request, UserDAO users){//{{{
         this.request = request;
-		log.error("cookies: " + request.getCookies() );
 		this.users = users;
     }//}}}
 

@@ -1,13 +1,33 @@
 <html>
+    <head>
+        <link href="/static/main.css" rel="stylesheet"/>
+        <link href="/static/login.css" rel="stylesheet"/>
+        <style type="text/css">
+        </style>
+    </head>
     <body>
-		<div>
-			<form action="/login/" method="POST">
-				${form.errors}
-				<ul>
-					${form.ul}
-					<input type="submit"/>
-				</ul>
-			</form>
-		</div>
+        <div id="wrapper">
+            <#include "includes/header.html">
+            <#include "includes/nav.html">
+            <div id="content">
+                <div id="mainContent">
+                    <form action="/login/" method="POST" id="loginForm">
+                        <fieldset>
+                            <legend>Log in</legend>
+                            <ul>
+                                ${form.ul}
+                                <li style="text-align:center"> <input type="submit" value="Submit"/></li>
+                            </ul>
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="secondaryContent"></div>
+            </div>
+            <#include "includes/footer.html">
+        </div>
+
+        <script src="/static/jquery-1.3.2.min.js" language="Javascript"></script>
+        <script type="text/javascript" src="/static/snip.js"></script>
+
     </body>
 </html>

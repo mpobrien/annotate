@@ -27,7 +27,7 @@ function highlightNotes(){//{{{
     }
 }//}}}
 
-function addNewNote(){
+function addNewNote(){//{{{
     startIndex = $(selected[0]).attr('id').split('_')[2]
     endIndex = $(selected[selected.length-1]).attr('id').split('_')[2]
     $.post('/snippets/' + slug + '/newnote/', 
@@ -36,17 +36,39 @@ function addNewNote(){
                 alert(data); // John
             }, "json");
     return false;
-}
+}//}}}
 
-function lookup(){
+
+var verbsout 
+
+function lookup(){//{{{
+	$('#lookup, #newnote').hide()
+	$('#lookupspinner').show()
     word = $(selected[0]).text();
+	console.debug("looking up", word)
     $.get('/verbs/', 
            {'term' : word },
             function(data){
-                console.debug(data); // John
+				setTimeout(
+					function(){
+						$('#lookupspinner').hide()
+						if( data.length == 0 ){
+							$('#lookup, #newnote').show()
+							$('#results').text("no results :(");
+						}else{
+							$('#lookup, #newnote').show()
+							result_str = ''
+							for( d in data ){
+								result_str += "<div>" + data[d].infinitive + "</div>"
+							}
+							$('#results').html(result_str);
+						}
+						console.debug(data); // John
+					}
+					,200);
             }, "json");
     return false;
-}
+}//}}}
 
 $(document).ready(
 	function(){
@@ -115,7 +137,7 @@ $(document).ready(
                         addnote_height = $('#addnote').height()
                         addnote_width = $('#addnote').width()
                         $('#addnote').css({'left':leftpos-4+'px',
-                                           'top':toppos-addnote_height-5 + 'px'}).fadeIn()
+                                           'top':toppos-addnote_height-13 + 'px'}).fadeIn()
                     }
 				}
 			)
