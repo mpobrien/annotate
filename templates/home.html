@@ -1,10 +1,15 @@
 <html>
 	<body>
-		<table>
-			<form action="/new/" method="POST">
-			    ${form.table}
-                <input type="submit"/>
-            </form>
-		</table>
+		<link href="/static/main.css" rel="stylesheet" />
+        <#include "includes/header.html">
+
+		<div id="content">
+			<table>
+				<form action="/new/" method="POST">
+					${form.table}
+					<input type="submit"/>
+				</form>
+			</table>
+		</div>
 	</body>
 </html>
