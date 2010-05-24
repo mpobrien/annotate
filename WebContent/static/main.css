@@ -7,6 +7,8 @@
 
 body{
     margin: 0px;
+    font-family: Georgia, Verdana;
+    font-size: 12px;
 }
 
 #header{
@@ -15,7 +17,11 @@ body{
     background-color: #F08E05;
 }
 
-#content{}
+#content{
+    left: 30px;
+    width: 400px;
+    background-color: #fcd614;
+}
 
 #footer{
     font-size: .8em;
