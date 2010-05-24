@@ -115,7 +115,7 @@ $(document).ready(
                         addnote_height = $('#addnote').height()
                         addnote_width = $('#addnote').width()
                         $('#addnote').css({'left':leftpos-4+'px',
-                                           'top':toppos-addnote_height-5 + 'px'}).fadeIn()
+                                           'top':toppos-addnote_height-10 + 'px'}).fadeIn()
                     }
 				}
 			)
