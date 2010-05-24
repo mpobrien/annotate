@@ -1,5 +1,5 @@
 package annotate.ctrlrs;
-import annotate.forms.*;
+import annotate.forms.*;//{{{
 import java.net.*;
 import java.io.*;
 import annotate.models.*;
@@ -18,7 +18,7 @@ import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
-import java.util.regex.*;
+import java.util.regex.*;//}}}
 
 @At("^/new/$")
 public class AddSnippetController extends Controller{
@@ -28,6 +28,8 @@ public class AddSnippetController extends Controller{
 
 	@Inject
 	TextSnippetDAO snippets;
+	@Inject
+	FlashProvider flash;
 
     @Override
     public WebResponse get(HttpServletRequest req, HttpServletResponse res){
@@ -39,6 +41,7 @@ public class AddSnippetController extends Controller{
 
     @Override
     public WebResponse post(HttpServletRequest req, HttpServletResponse res){
+		Flash fl = flash.get();
 		NewForm f = new NewForm();
 		f.bind( req );
 		f.validate();
@@ -51,8 +54,8 @@ public class AddSnippetController extends Controller{
 
 			//TODO handle duplicate slug if necessary?
 
-			SessionMessage sm = SessionMessage.getInstance(req, res);
-			sm.put( "success", ShowSnippetController.SUCCESS_NEW );
+			//SessionMessage sm = SessionMessage.getInstance(req, res);
+			fl.put( "success", ShowSnippetController.SUCCESS_NEW );
 			return responses.reverseRedirect( ShowSnippetController.class, ts.getSlug() );
 		}else{
 			return responses.render("home.html", ImmutableMap.of("form", f) );
