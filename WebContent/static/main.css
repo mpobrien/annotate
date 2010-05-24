@@ -5,28 +5,27 @@
  * #fffcfc offwhite
  * #229c79 aqua */
 
-body{
-    margin: 0px;
-    font-family: Georgia, Verdana;
-    font-size: 12px;
-}
+body{ margin: 0px; font-family: Verdana; }
 
-#header{
-    height: 50px;
-    width: 100%;
-    background-color: #F08E05;
-}
+a{ color: #229c79; }
+a:link, a:visited{ text-decoration:none;} 
+a:hover, a:active{ text-decoration:underline;} 
 
-#content{
-    left: 30px;
-    width: 400px;
-    background-color: #fcd614;
-}
+#header{ height: 100px; width: 100%; position:relative; background: #F08E05 url(/static/logo.png) no-repeat left center; }
+    #userlinks{ position:absolute; bottom:0px; right:0px }
 
-#footer{
-    font-size: .8em;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    font-style: italic;
+#wrapper{ width:1000px; position:relative; left:50%; margin-left:-500px;  background-color: #fcec97; }
+    #mainNav{ width:180px; float:left; height: 400px;}
+        #mainNav li{ font-size: .8em; }
+    #content{ float:right; width:820px;}
+        #mainContent{ width: 500px; float: left; }
+        #secondaryContent{ width: 280px; float: right; }
+
+#footer{ font-size: .8em; margin-left: auto; margin-right: auto; text-align: center; font-style: italic; clear: both; }
+
+
+/*************/
+p.annotatable{
+    font-size: .9em;
+    line-height: 2em;
 }

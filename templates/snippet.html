@@ -1,39 +1,55 @@
 <html>
-    <link href="/static/snip.css" rel="stylesheet" />
-
+    <head>
+        <link href="/static/main.css" rel="stylesheet"/>
+        <link href="/static/snip.css" rel="stylesheet"/>
+        <style type="text/css">
+        </style>
+    </head>
     <body>
-
-		<#if success == "new">
-			<div class="success">
-				New snippet added!
-			</div>
-		</#if>
-
-        <div class="content">
-			<h1>${snippet.title}</h1>
-            <p class="annotatable">
-				${snippet.text}
-            </p>
+        <div id="wrapper">
+            <#include "includes/header.html">
+            <#include "includes/nav.html">
+            <div id="content">
+                <div id="maincontent">
+			        <h1>${snippet.title}</h1>
+                    <p class="annotatable">
+                        ${snippet.text}
+                    </p>
+                </div>
+                <div id="secondarycontent">
+                </div>
+            </div>
+            <#include "includes/footer.html">
         </div>
 
-        <span id="addnote">
+        <script src="/static/jquery-1.3.2.min.js" language="javascript"></script>
+        <script type="text/javascript" src="/static/snip.js"></script>
+
+        <script>
+            notes = [
+            <#if snippet.notes??>
+                <#list snippet.notes as note>
+                    [${note.startIndex},${note.endIndex}],
+                </#list>
+            </#if>
+            ]
+            
+            var slug = '${snippet.slug}'
+
+        </script>
+
+		<!--
             <a id="lookup" href="javascript:lookup()">+Lookup</a><br/>
             <a id="newnote" href="javascript:addNewNote()">+New Note</a>
-        </span>
-
+			<div id="lookupspinner">searching&hellip;<div>
+				</div>-->
+		<div id="addnote">
+			<div id="whatever" class="D_verticalMiddle">
+				<a id="newnote" href="javascript:addNewNote()">+New Note</a><br/>
+				<a id="lookup" href="javascript:lookup()">+Lookup</a> 
+			</div>
+			<div id="results"></div>
+			<div id="lookupspinner" class="D_verticalMiddle">searching&hellip;<div>
+		</div>
     </body>
-    <script src="/static/jquery-1.3.2.min.js" language="Javascript"></script>
-    <script type="text/javascript" src="/static/snip.js"></script>
-	<script>
-		notes = [
-		<#if snippet.notes??>
-			<#list snippet.notes as note>
-				[${note.startIndex},${note.endIndex}],
-			</#list>
-		</#if>
-		]
-        
-        var slug = '${snippet.slug}'
-
-	</script>
 </html>
