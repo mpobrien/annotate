@@ -31,11 +31,8 @@ public class ShowSnippetController extends Controller{
 
     @Override
     public WebResponse get(HttpServletRequest req, HttpServletResponse res){
-        //SessionMessage sm = SessionMessage.getInstance(req, res);
 		Flash fl = flash.get();
         Map context = Maps.newHashMap();
-		log.error("cookie said: " + fl.get("success"));
-
 
 		if( SUCCESS_NEW.equals(fl.get("success") + "") ){
 			context.put("success", "new");

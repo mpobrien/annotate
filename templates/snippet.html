@@ -11,6 +11,11 @@
             <#include "includes/nav.html">
             <div id="content">
                 <div id="maincontent">
+					<#if success?? && success == "new">
+						<div class="success">
+							New snippet created!
+						</div>
+					</#if>
 			        <h1>${snippet.title}</h1>
                     <p class="annotatable">
                         ${snippet.text}

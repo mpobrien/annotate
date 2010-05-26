@@ -32,15 +32,15 @@ public class AddSnippetController extends Controller{
 	FlashProvider flash;
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){
+    public WebResponse get(HttpServletRequest req, HttpServletResponse res){//{{{
 		Map context = Maps.newHashMap();
 		NewForm f = new NewForm();
 		context.put("form", f);
 		return responses.render("home.html", context);
-    }
+    }//}}}
 
     @Override
-    public WebResponse post(HttpServletRequest req, HttpServletResponse res){
+    public WebResponse post(HttpServletRequest req, HttpServletResponse res){//{{{
 		Flash fl = flash.get();
 		NewForm f = new NewForm();
 		f.bind( req );
@@ -60,7 +60,7 @@ public class AddSnippetController extends Controller{
 		}else{
 			return responses.render("home.html", ImmutableMap.of("form", f) );
 		}
-    }
+    }//}}}
 
 	public static String slugify(String input) {
 		String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
