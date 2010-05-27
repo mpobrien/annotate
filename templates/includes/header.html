@@ -3,7 +3,7 @@
         <#if user?? && user.isLoggedIn>
             hola, ${user.username}! <a href="/logout/">Log out</a>
         <#else>
-            <a href="/login/">Log in</a> &bull; <a href="/register/">Sign up</a>
+            <a id="loginlink" href="/login/">Log in</a> &bull; <a href="/register/">Sign up</a>
         </#if>
     </div>
 </div>
