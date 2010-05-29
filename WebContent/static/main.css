@@ -7,16 +7,17 @@
 
 body{ margin: 0px; font-family: Verdana; }
 
-a{ color: #229c79; }
+/*a{ color: #229c79; }*/
 a:link, a:visited{ text-decoration:none;} 
 a:hover, a:active{ text-decoration:underline;} 
 
-#header{ height: 100px; width: 100%; position:relative; background: #F08E05 url(/static/logo.png) no-repeat left center; }
-    #userlinks{ position:absolute; bottom:0px; right:0px; background: #229c79; width:100%; text-align:right; vertical-align:bottom;color: white; font-size:.8em; height:40px;}
+/*#header{ height: 100px; width: 100%; position:relative; background: #F08E05 url(/static/logo.png) no-repeat left center; }*/
+#header{ height: 100px; width: 100%; position:relative; background: black url(/static/logo.png) no-repeat left center; }
+    #userlinks{ position:absolute; bottom:0px; right:0px; background: black; width:100%; text-align:right; vertical-align:bottom;color: white; font-size:.8em; height:40px;}
     #userlinks a{ color: #fcec97; }
     #loginlink { margin-left: 10px; }
 
-#wrapper{ width:1000px; position:relative; left:50%; margin-left:-500px;  background-color: #fcec97; }
+#wrapper{ width:1000px; position:relative; left:50%; margin-left:-500px;  background-color: white; }
     #mainNav{ width:180px; float:left; height: 400px;}
         #mainNav li{ font-size: .8em; }
     #content{ float:right; width:820px;}
@@ -25,6 +26,15 @@ a:hover, a:active{ text-decoration:underline;}
 
 #footer{ font-size: .8em; margin-left: auto; margin-right: auto; text-align: center; font-style: italic; clear: both; }
 
+.D_faded { opacity: .8; }
+
+/*.opaque2 {  // for IE5-7*/
+/*filter: alpha(opacity=50);*/
+/*}*/
+
+/*.opaque3 {  // for IE8*/
+/*-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";*/
+/*}*/
 
 /*************/
 p.annotatable{
