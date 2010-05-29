@@ -23,6 +23,11 @@ a:hover, a:active{ text-decoration:underline;}
 
 #footer{ font-size: .8em; margin-left: auto; margin-right: auto; text-align: center; font-style: italic; clear: both; }
 
+#lookupform{
+    text-align:center;
+    margin: auto;
+    margin-left: auto;
+}
 
 /*************/
 p.annotatable{
