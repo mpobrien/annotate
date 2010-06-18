@@ -42,7 +42,7 @@ public class AddNoteController extends Controller{
 			TextNote newNote = new TextNote();
 			newNote.setStartIndex( f.getStartIndex().getValue() );
 			newNote.setEndIndex( f.getEndIndex().getValue() );
-			ts.getNotes().add(newNote);
+			//ts.getNotes().add(newNote);
 			snippets.save(ts);
         }
 		return responses.render("snippet.html", ImmutableMap.of("snippet", ts));

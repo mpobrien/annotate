@@ -9,6 +9,7 @@
         </style>
     </head>
     <body>
+        <#include "includes/defmodal.html">
         <div id="wrapper">
             <#include "includes/header.html">
             <#include "includes/nav.html">
@@ -30,29 +31,6 @@
                 </div>
             </div>
             <#include "includes/footer.html">
-        </div>
-        <div id="defmodal" class="modal">
-            <div style="text-align:right"> <a href="#" class="close">close</a></div>
-            <ul class="formlayout">
-                <li> <label for="word">Word</label> <input type="text" name="definition"></input> </li>
-                <li> <label for="part_of_speech">Part of Speech</label>
-                    <select name="part_of_speech">
-                        <option value="">---</option>
-                        <option value="Verb">Verb</option>
-                        <option value="Noun">Noun</option>
-                        <option value="Adjective">Adjective</option>
-                        <option value="Adverb">Adverb</option>
-                        <option value="Pronoun">Pronoun</option>
-                        <option value="Interjection">Interjection</option>
-                        <option value="Conjunction">Conjunction</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="definition">Definition</label>
-                    <input type="text" name="definition" value=""/>
-                </li>
-            </ul>
-            
         </div>
 		<div id="mask"></div>
 
@@ -85,6 +63,5 @@
 			<div id="results"></div>
 			<div id="lookupspinner" class="D_verticalMiddle">searching&hellip;<div>
 		</div>
-
     </body>
 </html>

@@ -22,7 +22,7 @@ public class TextSnippet extends AbstractMongoEntity{
 	public String getSlug(){    return slug;  }
 	public void setSlug(String slug){    this.slug = slug;  }
 
-    public List<TextNote> getNotes(){    return notes;  }
-    public void setNotes(List<TextNote> notes){    this.notes = notes;  }
+    //public List<TextNote> getNotes(){    return notes;  }
+    //public void setNotes(List<TextNote> notes){    this.notes = notes;  }
 
 }

@@ -50,11 +50,12 @@ function closenotebox(){
     return false;
 }
 
+var last_clicked_word;
 function lookup(){//{{{
 	$('#lookup, #newnote').hide()
 	$('#lookupspinner').show()
     word = $(selected[0]).text();
-	console.debug("looking up", word)
+    last_clicked_word = selected[0];
     $.get('/verbs/', 
            {'term' : word },
             function(data){
