@@ -28,6 +28,14 @@
         </exec>
     </target>
 
+    <target name="makewar" depends="build">
+        <war destfile="test.war" webxml="WebContent/WEB-INF/web.xml">
+            <lib dir="${lib.dir}"/>
+            <classes dir="WebContent/WEB-INF/classes/"/>
+            <fileset dir="WebContent/"/>
+            <fileset dir="conf/"/>
+        </war>
+    </target>
     <!--target name="runserver">
         <java classname="com.mob.bootstrap.Jetty">
              <classpath>

@@ -41,6 +41,15 @@ function addNewNote(){//{{{
 
 var verbsout 
 
+function closenotebox(){
+    $('#addnote').fadeOut();
+	$('#lookup, #newnote').show()
+    $('#results').hide()
+    $('.tog').removeClass('tog')
+    selected = []
+    return false;
+}
+
 function lookup(){//{{{
 	$('#lookup, #newnote').hide()
 	$('#lookupspinner').show()
@@ -53,15 +62,14 @@ function lookup(){//{{{
 					function(){
 						$('#lookupspinner').hide()
 						if( data.length == 0 ){
-							$('#lookup, #newnote').show()
-							$('#results').text("no results :(");
+							$('#results').html('no results&hellip;<br/> <a href="#defmodal" name="modal">Add a definition</a>').show();
 						}else{
-							$('#lookup, #newnote').show()
+							//$('#lookup, #newnote').show()
 							result_str = ''
 							for( d in data ){
 								result_str += "<div>" + data[d].infinitive + "</div>"
 							}
-							$('#results').html(result_str);
+							$('#results').html(result_str).show();
 						}
 						console.debug(data); // John
 					}
@@ -134,10 +142,11 @@ $(document).ready(
                     if( selected.length > 0 ){
                         leftpos = $(selected[0]).offset().left
                         toppos = $(selected[0]).offset().top 
+                        selected_height = $(selected[0]).height() 
                         addnote_height = $('#addnote').height()
                         addnote_width = $('#addnote').width()
                         $('#addnote').css({'left':leftpos-4+'px',
-                                           'top':toppos-addnote_height-13 + 'px'}).fadeIn()
+                                           'top':toppos+selected_height + 3 + 'px'}).fadeIn()
                     }
 				}
 			)

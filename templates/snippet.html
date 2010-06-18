@@ -3,6 +3,9 @@
         <link href="/static/main.css" rel="stylesheet"/>
         <link href="/static/snip.css" rel="stylesheet"/>
         <style type="text/css">
+            #defmodal{
+                background-color: white;
+            }
         </style>
     </head>
     <body>
@@ -10,6 +13,7 @@
             <#include "includes/header.html">
             <#include "includes/nav.html">
             <div id="content">
+            <a href="#defmodal" name="modal">asjdjasd</a>
                 <div id="maincontent">
 					<#if success?? && success == "new">
 						<div class="success">
@@ -27,9 +31,34 @@
             </div>
             <#include "includes/footer.html">
         </div>
+        <div id="defmodal" class="modal">
+            <div style="text-align:right"> <a href="#" class="close">close</a></div>
+            <ul class="formlayout">
+                <li> <label for="word">Word</label> <input type="text" name="definition"></input> </li>
+                <li> <label for="part_of_speech">Part of Speech</label>
+                    <select name="part_of_speech">
+                        <option value="">---</option>
+                        <option value="Verb">Verb</option>
+                        <option value="Noun">Noun</option>
+                        <option value="Adjective">Adjective</option>
+                        <option value="Adverb">Adverb</option>
+                        <option value="Pronoun">Pronoun</option>
+                        <option value="Interjection">Interjection</option>
+                        <option value="Conjunction">Conjunction</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="definition">Definition</label>
+                    <input type="text" name="definition" value=""/>
+                </li>
+            </ul>
+            
+        </div>
+		<div id="mask"></div>
 
         <script src="/static/jquery-1.3.2.min.js" language="javascript"></script>
         <script type="text/javascript" src="/static/snip.js"></script>
+        <script type="text/javascript" src="/static/modal.js"></script>
 
         <script>
             notes = [
@@ -39,9 +68,7 @@
                 </#list>
             </#if>
             ]
-            
             var slug = '${snippet.slug}'
-
         </script>
 
 		<!--
@@ -50,12 +77,14 @@
 			<div id="lookupspinner">searching&hellip;<div>
 				</div>-->
 		<div id="addnote">
-			<div id="whatever" class="D_verticalMiddle">
-				<a id="newnote" href="javascript:addNewNote()">+New Note</a><br/>
-				<a id="lookup" href="javascript:lookup()">+Lookup</a> 
+            <div id="closebox"><a href="#" onclick="closenotebox()">close</a></div>
+			<div id="whatever" class="D_verticalMiddle" style="float:left">
+                <!--<a id="newnote" href="javascript:addNewNote()">+New Note</a><br/>-->
+				<a id="lookup" href="javascript:lookup()">+Look up</a> 
 			</div>
 			<div id="results"></div>
 			<div id="lookupspinner" class="D_verticalMiddle">searching&hellip;<div>
 		</div>
+
     </body>
 </html>

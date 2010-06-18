@@ -8,6 +8,11 @@
 #addnote{ display: none; background-color: black; z-index: 1000; position: absolute; font-family: Georgia; font-size:12px; color: white; padding: 5px; font-weight:bold ;}
     #lookup{}
     #newnote{}
+#verb_meta{ color: #aaa;}
+
+#closebox{ font-weight: normal; font-size: .8em; text-align:right; }
+#closebox a:hover{ text-decoration: underline; color: white; }
+#closebox a:link{ text-decoration: underline; color:white;  }
 
 #addnote a:link{ text-decoration: none; color: white; }
 #whatever{ height:100%}
