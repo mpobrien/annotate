@@ -25,8 +25,8 @@ public class LogoutController extends Controller{
 	private static final Logger log = Logger.getLogger( LogoutController.class );
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){//{{{
-		logout(res);
+    public WebResponse get(WebHit hit){//{{{
+		logout(hit.getResponse());
 		return responses.reverseRedirect(LoginController.class);
 	}//}}}
 

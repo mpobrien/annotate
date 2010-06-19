@@ -29,13 +29,13 @@ public class AddNoteController extends Controller{
 	public String slug;
 
     @Override
-    public WebResponse post(HttpServletRequest req, HttpServletResponse res){
+    public WebResponse post(WebHit hit){
 		this.slug = args.get(0);
 		TextSnippet ts = snippets.findBySlug(this.slug);
 		if( ts == null ){ return responses.render("404.html"); }
 
         NoteForm f = new NoteForm();
-        f.bind(req);
+        f.bind(hit.getRequest());
         if( f.hasErrors() ){
 			return responses.render("404.html");
         }else{

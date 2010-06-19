@@ -30,7 +30,7 @@ public class ShowSnippetController extends Controller{
 	public String slug;
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){
+    public WebResponse get(WebHit hit){
 		Flash fl = flash.get();
         Map context = Maps.newHashMap();
 

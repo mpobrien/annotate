@@ -28,15 +28,15 @@ public class RegisterController extends Controller{
     UserDAO users;
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){//{{{
+    public WebResponse get(WebHit hit){//{{{
 		RegisterForm form = new RegisterForm();
 		return responses.render(TEMPLATE, ImmutableMap.of("form", form));
 	}//}}}
 
     @Override
-    public WebResponse post(HttpServletRequest req, HttpServletResponse res){//{{{
+    public WebResponse post(WebHit hit){//{{{
 		RegisterForm form = new RegisterForm();
-		form.bind(req);
+		form.bind(hit.getRequest());
 		form.validate();
 		Map context = ImmutableMap.of("form", form);
 		if( form.hasErrors() ){

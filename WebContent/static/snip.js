@@ -51,6 +51,7 @@ function closenotebox(){
 }
 
 var last_clicked_word;
+
 function lookup(){//{{{
 	$('#lookup, #newnote').hide()
 	$('#lookupspinner').show()
@@ -79,9 +80,18 @@ function lookup(){//{{{
     return false;
 }//}}}
 
+function saveDefinition(){
+    word = $('#definition_input').val();
+    translation = $('#definition_trans_input').val();
+    $.aj
+}
+
 $(document).ready(
 	function(){
 		var ps = 0;
+        $('#def_submit').click(
+            function(){ saveDefinition() }
+        )
 		$('.annotatable').each(
 			function(){
 				words = $(this).text().split(/\s+/);

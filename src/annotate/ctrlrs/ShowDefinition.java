@@ -23,8 +23,8 @@ public class ShowDefinition extends Controller{
 	DefinitionDAO defs;
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){
-		String term = req.getParameter("term") + "";
+    public WebResponse get(WebHit hit){
+		String term = hit.getStrParam("term");
         List<Definition> results = new ArrayList<Definition>(0);
         if( term != null && term.length() > 0 ){
             results = defs.findByTerm(term);

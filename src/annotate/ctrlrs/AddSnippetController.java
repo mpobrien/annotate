@@ -32,7 +32,7 @@ public class AddSnippetController extends Controller{
 	FlashProvider flash;
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){//{{{
+    public WebResponse get(WebHit hit){//{{{
 		Map context = Maps.newHashMap();
 		NewForm f = new NewForm();
 		context.put("form", f);
@@ -40,10 +40,10 @@ public class AddSnippetController extends Controller{
     }//}}}
 
     @Override
-    public WebResponse post(HttpServletRequest req, HttpServletResponse res){//{{{
+    public WebResponse post(WebHit hit){//{{{
 		Flash fl = flash.get();
 		NewForm f = new NewForm();
-		f.bind( req );
+		f.bind(hit.getRequest());
 		f.validate();
 		if( !f.hasErrors() ){
 			TextSnippet ts = new TextSnippet();

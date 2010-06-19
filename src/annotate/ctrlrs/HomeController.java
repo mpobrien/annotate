@@ -27,7 +27,7 @@ public class HomeController extends Controller{
 	UserProvider up;
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){//{{{
+    public WebResponse get(WebHit hit){//{{{
 		User user = up.get();
 		List<TextSnippet> allSnippets = snippets.findAll(0,100);
 		Map context = Maps.newHashMap();
@@ -37,8 +37,8 @@ public class HomeController extends Controller{
     }//}}}
 
     @Override
-    public WebResponse post(HttpServletRequest req, HttpServletResponse res){//{{{
-		return get(req, res);
+    public WebResponse post(WebHit hit){//{{{
+		return get(hit);
     }//}}}
 
 }

@@ -25,8 +25,8 @@ public class DefinitionEdit extends Controller{
 	DefinitionDAO defs;
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){
-		String id = req.getParameter("id") != null ? req.getParameter("id") : "";
+    public WebResponse get(WebHit hit){
+		String id = hit.getStrParam("id");
 		DefinitionForm form = null;
 		if( id.length() > 0 ){
 			try{
@@ -45,9 +45,9 @@ public class DefinitionEdit extends Controller{
     }
 
     @Override
-    public WebResponse post(HttpServletRequest req, HttpServletResponse res){
+    public WebResponse post(WebHit hit){
 		DefinitionForm form = new DefinitionForm(false);
-        form.bind( req );
+        form.bind( hit.getRequest() );
 		if( !form.hasErrors() ){
 			Definition def;
             if( form.getDefId().getValue() != null && form.getDefId().getValue().length() > 0 ){

@@ -29,15 +29,15 @@ public class LoginController extends Controller{
     UserDAO users;
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){//{{{
+    public WebResponse get(WebHit hit){//{{{
 		LoginForm form = new LoginForm();
 		return responses.render(TEMPLATE, ImmutableMap.of("form", form));
 	}//}}}
 
     @Override
-    public WebResponse post(HttpServletRequest req, HttpServletResponse res){//{{{
+    public WebResponse post(WebHit hit){//{{{
 		LoginForm form = new LoginForm();
-		form.bind(req);
+		form.bind(hit.getRequest());
 		form.validate();
 		Map context = ImmutableMap.of("form", form);
 		if( form.hasErrors() ){
@@ -53,7 +53,7 @@ public class LoginController extends Controller{
 					return responses.render(TEMPLATE, context);
 				}else{
 					log.info("successful log in");
-					login(testUser, res);
+					login(testUser, hit.getResponse());
 					return responses.redirect("/");
 				}
 			}

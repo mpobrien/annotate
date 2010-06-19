@@ -25,8 +25,8 @@ public class VerbLookup extends Controller{
 	public String slug;
 
     @Override
-    public WebResponse get(HttpServletRequest req, HttpServletResponse res){
-        String term = req.getParameter("term");
+    public WebResponse get(WebHit hit){
+        String term = hit.getStrParam("term");
         List<Verb> results = new ArrayList<Verb>(0);
         if( term != null && term.length() > 0 ){
             results = verbs.findByTerm(term);
