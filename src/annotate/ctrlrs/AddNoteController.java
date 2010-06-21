@@ -1,6 +1,7 @@
 package annotate.ctrlrs;
 import annotate.forms.*;
 import annotate.models.*;
+import annotate.models.dao.*;
 import com.mob.web.*;
 import com.mob.forms.*;
 import javax.servlet.http.HttpServletRequest;

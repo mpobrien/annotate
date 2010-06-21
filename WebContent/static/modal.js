@@ -9,7 +9,7 @@ $(document).ready(
                         newval.push($(selected[i]).text())
                     }
                 }
-                $('#definition_input').val( newval.join(' '));
+                $('#word_input').val( newval.join(' '));
             })
 		$('a[name=modal]').live('click',
 			function(e) {  

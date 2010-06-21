@@ -1,6 +1,7 @@
 package annotate.ctrlrs;
 import annotate.forms.*;
 import annotate.models.*;
+import annotate.models.dao.*;
 import com.mob.web.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,23 +16,27 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
 
-@At("^/verbs/?$")
-public class VerbLookup extends Controller{
-	Logger log = Logger.getLogger( VerbLookup.class );
+@At("^/lookup/?$")
+public class Lookup extends Controller{
+	Logger log = Logger.getLogger( Lookup.class );
 
+	//VerbDAO verbs;
 	@Inject
-	VerbDAO verbs;
+	WordDAO words;
 
 	public String slug;
 
     @Override
     public WebResponse get(WebHit hit){
         String term = hit.getStrParam("term");
-        List<Verb> results = new ArrayList<Verb>(0);
+        List<Word> results = new ArrayList<Word>(0);
         if( term != null && term.length() > 0 ){
-            results = verbs.findByTerm(term);
+            results = words.lookUp(term);
         }
-		return responses.json(results);
+		if( results == null )
+			return responses.json( new ArrayList<Word>(0) );
+		else
+			return responses.json(results);
     }
 
 

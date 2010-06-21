@@ -2,6 +2,7 @@ package annotate.ctrlrs;
 import annotate.forms.*;
 import annotate.models.*;
 import annotate.modules.*;
+import annotate.models.dao.*;
 import com.mob.web.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ public class HomeController extends Controller{
     @Override
     public WebResponse get(WebHit hit){//{{{
 		User user = up.get();
-		List<TextSnippet> allSnippets = snippets.findAll(0,100);
+		List<TextSnippet> allSnippets = snippets.find().asList();
 		Map context = Maps.newHashMap();
 		context.put( "snippets", allSnippets );
 		context.put( "user", user );

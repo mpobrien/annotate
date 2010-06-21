@@ -7,8 +7,8 @@ import java.util.*;
 import com.mob.forms.*;
 import annotate.forms.DefinitionForm;
 
-@MongoDocument
-public class Definition extends AbstractMongoEntity{
+@Entity
+public class Definition{
 	private static final Logger log = Logger.getLogger( Definition.class );
 
 	public enum PartOfSpeech{//{{{
@@ -28,11 +28,13 @@ public class Definition extends AbstractMongoEntity{
 		Feminine
 	}//}}}
 
+	@Id
+	private String id;
     private String root;
     private String definition;
 	private Gender gender;
 
-	@MongoEmbedded
+	@Embedded
     private List<UsageExample> examples;
 
 	private String usageNote;
@@ -61,6 +63,9 @@ public class Definition extends AbstractMongoEntity{
 	public Gender getGender(){    return gender;  }
 	public void setGender(Gender gender){    this.gender = gender;  }
 
+	public String getId(){    return id;  }
+	public void setId(String id){    this.id = id;  }
+
 	public static Definition fromDefinitionForm(DefinitionForm form){//{{{
 		Definition d = new Definition();
 		d.setPartOfSpeech( form.getPartOfSpeech().getValue() );
@@ -82,5 +87,6 @@ public class Definition extends AbstractMongoEntity{
 		d.setExamples( defs );
 		return d;
 	}//}}}
+	
 	
 }

@@ -3,8 +3,8 @@ import com.google.code.morphia.*;
 import com.google.code.morphia.annotations.*;
 import java.util.*;
 
-@MongoDocument
-public class UsageExample extends AbstractMongoEntity{
+@Entity
+public class UsageExample{
 
 	private String definition;
 	private List<String> examples;

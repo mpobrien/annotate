@@ -3,6 +3,7 @@ import annotate.forms.*;//{{{
 import java.net.*;
 import java.io.*;
 import annotate.models.*;
+import annotate.models.dao.*;
 import com.mob.web.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

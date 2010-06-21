@@ -3,14 +3,16 @@ import com.google.code.morphia.*;
 import com.google.code.morphia.annotations.*;
 import java.util.*;
 
-@MongoDocument
-public class TextSnippet extends AbstractMongoEntity{
+@Entity
+public class TextSnippet{
 
+	@Id
+	private String id;
     private String text;
     private String title;
 	private String slug;
 
-	@MongoEmbedded
+	@Embedded
 	private List<TextNote> notes;
     
     public String getText(){    return text;  }
@@ -25,4 +27,7 @@ public class TextSnippet extends AbstractMongoEntity{
     //public List<TextNote> getNotes(){    return notes;  }
     //public void setNotes(List<TextNote> notes){    this.notes = notes;  }
 
+	
+	public String getId(){    return id;  }
+	public void setId(String id){    this.id = id;  }
 }

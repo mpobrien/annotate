@@ -2,9 +2,11 @@ package annotate.models;
 import com.google.code.morphia.*;
 import com.google.code.morphia.annotations.*;
 
-@MongoDocument
-public class TextNote extends AbstractMongoEntity{
+@Entity
+public class TextNote{
 	
+	@Id
+	private String id;
 	private int startIndex;
 	private int endIndex;
 
@@ -14,4 +16,8 @@ public class TextNote extends AbstractMongoEntity{
 	public int getEndIndex(){    return endIndex;  }
 	public void setEndIndex(int endIndex){    this.endIndex = endIndex;  }
 
+	
+	public String getId(){    return id;  }
+	
+	public void setId(String id){    this.id = id;  }
 }

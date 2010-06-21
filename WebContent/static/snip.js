@@ -57,9 +57,10 @@ function lookup(){//{{{
 	$('#lookupspinner').show()
     word = $(selected[0]).text();
     last_clicked_word = selected[0];
-    $.get('/verbs/', 
+    $.get('/lookup/', 
            {'term' : word },
             function(data){
+				console.debug(data)
 				setTimeout(
 					function(){
 						$('#lookupspinner').hide()
@@ -69,7 +70,8 @@ function lookup(){//{{{
 							//$('#lookup, #newnote').show()
 							result_str = ''
 							for( d in data ){
-								result_str += "<div>" + data[d].infinitive + "</div>"
+								//result_str += "<div>" + data[d].infinitive + "</div>"
+								result_str += "<div>" + data[d].definition + "</div>"
 							}
 							$('#results').html(result_str).show();
 						}
@@ -81,9 +83,11 @@ function lookup(){//{{{
 }//}}}
 
 function saveDefinition(){
-    word = $('#definition_input').val();
-    translation = $('#definition_trans_input').val();
-    $.aj
+    word = $('#word_input').val();
+    translation = $('#translation').val();
+    $.post("/defs/",
+           { "word": word, "translation": translation },
+            function(data){ console.debug(data) });
 }
 
 $(document).ready(

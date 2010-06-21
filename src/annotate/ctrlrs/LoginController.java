@@ -11,6 +11,7 @@ import org.apache.log4j.*;
 import java.util.*;
 import com.google.inject.*;
 import com.google.common.collect.*;
+import annotate.models.dao.*;
 import com.mongodb.Mongo;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;

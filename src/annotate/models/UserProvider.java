@@ -1,6 +1,7 @@
 package annotate.models;
 import annotate.ctrlrs.*;
 import com.google.inject.*;
+import annotate.models.dao.*;
 import com.google.inject.servlet.*;
 import com.mob.web.*;
 import java.io.*;

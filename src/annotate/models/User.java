@@ -11,9 +11,11 @@ import java.security.SecureRandom;
 import org.apache.commons.codec.binary.Base64;
 
 
-@MongoDocument
-public class User extends AbstractMongoEntity implements SiteUser{
+@Entity
+public class User implements SiteUser{
 	
+	@Id
+	private String id;
     private String username;
     private String passwordHash;
     private String salt;
@@ -63,4 +65,8 @@ public class User extends AbstractMongoEntity implements SiteUser{
 	}
 
 	
+	
+	public String getId(){    return id;  }
+	
+	public void setId(String id){    this.id = id;  }
 }

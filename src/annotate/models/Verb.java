@@ -4,8 +4,8 @@ import java.util.*;
 import com.google.code.morphia.annotations.*;
 //import com.mob.web.Util.Pair;
 
-@MongoDocument
-public class Verb extends AbstractMongoEntity{
+@Entity
+public class Verb {
 
 // 	public static final ImmutableList conjListing =
 // 		ImmutableList.of(
@@ -34,10 +34,12 @@ public class Verb extends AbstractMongoEntity{
 	}//}}}
 	public enum Pronoun{ YO, TU, EL_ELLA_UD, NOS, VOS, ELS_UDS; }
 
+	@Id
+	private String id;
     private String infinitive;
     private List<String> conj;
 
-	@MongoTransient
+	@Transient
 	private String origSource;
     
     public String getInfinitive(){    return infinitive;  }
@@ -60,4 +62,8 @@ public class Verb extends AbstractMongoEntity{
 // 
 // 	}
 
+	
+	public String getId(){    return id;  }
+	
+	public void setId(String id){    this.id = id;  }
 }
